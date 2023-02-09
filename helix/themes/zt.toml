@@ -1,0 +1,61 @@
+"ui.menu" = { fg = "white", bg = "black" }
+"ui.menu.selected" = { modifiers = ["reversed"] }
+"ui.linenr" = { fg = "gray", bg = "black" }
+"ui.linenr.selected" = { fg = "white", bg = "black", modifiers = ["bold"] }
+"ui.selection" = { fg = "black", bg = "blue" }
+"ui.selection.primary" = { fg = "black", bg = "dark_yellow" }
+"ui.text.inactive" = { fg = "gray" }
+"ui.help" = { fg = "white", bg = "black" }
+"ui.popup" = { bg = "black" }
+"ui.window" = { fg = "black" }
+"ui.statusline" = { fg = "white", bg = "black" }
+"ui.statusline.inactive" = { fg = "gray", bg = "black" }
+"ui.cursor" = { fg = "white", modifiers = ["reversed"] }
+"ui.cursor.match" = { fg = "yellow", modifiers = ["underlined"] }
+"ui.statusline.normal" = { fg = "black", bg = "dark_blue" }
+"ui.statusline.insert" = { fg = "black", bg = "dark_red" }
+"ui.statusline.select" = { fg = "black", bg = "dark_yellow" }
+
+"comment" = { fg = "white" }
+"variable" = "red"
+"constant.numeric" = "yellow"
+"constant" = "yellow"
+"attributes" = "yellow"
+"type" = "yellow"
+"string"  = "green"
+"variable.other.member" = "green"
+"constant.character.escape" = "cyan"
+"function" = "blue"
+"constructor" = "blue"
+"special" = "blue"
+"keyword" = "magenta"
+"label" = "magenta"
+"namespace" = "magenta"
+
+"markup.heading" = "blue"
+"markup.list" = "red"
+"markup.bold" = { fg = "yellow", modifiers = ["bold"] }
+"markup.italic" = { fg = "magenta", modifiers = ["italic"] }
+"markup.link.url" = { fg = "yellow", modifiers = ["underlined"] }
+"markup.link.text" = "red"
+"markup.quote" = "cyan"
+"markup.raw" = "green"
+
+"diff.plus" = "green"
+"diff.delta" = "yellow"
+"diff.minus" = "red"
+
+"info" = "blue"
+"hint" = "gray"
+"debug" = "gray"
+"warning" = "yellow"
+"error" = "red"
+
+"diagnostic" = { modifiers = ["underlined"] }
+
+[palette]
+black = "#1f2e2e"
+red = "#ff6a6a"
+dark_blue = "#4295e1"
+dark_red = "#e24a4a"
+dark_yellow = "#f5f558"
