@@ -1,0 +1,10 @@
+inherits = "fleet_dark"
+
+"ui.statusline.normal" = { fg = "black", bg = "dark_blue" }
+"ui.statusline.insert" = { fg = "black", bg = "dark_red" }
+"ui.statusline.select" = { fg = "black", bg = "dark_yellow" }
+
+[palette]
+dark_blue = "#66a3ff"
+dark_red = "#e24a4a"
+dark_yellow = "#c6be1a"
