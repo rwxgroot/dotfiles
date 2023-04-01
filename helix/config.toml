@@ -1,7 +1,6 @@
 theme = "zdarker"
 
 [editor]
-mouse = false
 color-modes = true
 bufferline = "multiple"
 cursorline = true
@@ -15,17 +14,17 @@ insert = "underline"
 normal = "block"
 
 [editor.statusline]
-left = ["mode", "spacer", "spinner", "file-name"]
-right = ["diagnostics", "position", "total-line-numbers", "file-line-ending", "file-type"]
+left = ["mode", "spacer", "spinner", "file-name", "file-encoding", "version-control"]
+right = ["version-control", "diagnostics", "position", "total-line-numbers", "file-type"]
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
 [editor.lsp]
 display-messages = true
+display-inlay-hints = true
 
 [keys.normal]
-esc = ["collapse_selection", "keep_primary_selection"]
 "left" = "no_op"
 "right" = "no_op"
 "up" = "no_op"
