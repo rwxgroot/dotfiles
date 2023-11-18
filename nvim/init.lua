@@ -111,7 +111,7 @@ require("lazy").setup(
             branch = "v3.x",
             dependencies = {
                 "nvim-lua/plenary.nvim",
-                "nvim-tree/nvim-web-devicons", 
+                "nvim-tree/nvim-web-devicons",
                 "MunifTanjim/nui.nvim"
             }
         },
@@ -167,18 +167,89 @@ require("lazy").setup(
                 "nvim-treesitter/nvim-treesitter-textobjects"
             },
             build = ":TSUpdate"
+        },
+        {
+            {
+                "willothy/nvim-cokeline",
+                dependencies = {
+                    "nvim-lua/plenary.nvim"
+                },
+                config = true
+            }
+        },
+        {
+            "neovim/nvim-lspconfig",
+            config = function()
+                local format_is_enabled = true
+                vim.api.nvim_create_user_command(
+                    "KickstartFormatToggle",
+                    function()
+                        format_is_enabled = not format_is_enabled
+                        print("Setting autoformatting to: " .. tostring(format_is_enabled))
+                    end,
+                    {}
+                )
+
+                local _augroups = {}
+                local get_augroup = function(client)
+                    if not _augroups[client.id] then
+                        local group_name = "kickstart-lsp-format-" .. client.name
+                        local id = vim.api.nvim_create_augroup(group_name, {clear = true})
+                        _augroups[client.id] = id
+                    end
+
+                    return _augroups[client.id]
+                end
+
+                vim.api.nvim_create_autocmd(
+                    "LspAttach",
+                    {
+                        group = vim.api.nvim_create_augroup("kickstart-lsp-attach-format", {clear = true}),
+                        callback = function(args)
+                            local client_id = args.data.client_id
+                            local client = vim.lsp.get_client_by_id(client_id)
+                            local bufnr = args.buf
+
+                            if not client.server_capabilities.documentFormattingProvider then
+                                return
+                            end
+
+                            vim.api.nvim_create_autocmd(
+                                "BufWritePre",
+                                {
+                                    group = get_augroup(client),
+                                    buffer = bufnr,
+                                    callback = function()
+                                        if not format_is_enabled then
+                                            return
+                                        end
+
+                                        vim.lsp.buf.format {
+                                            async = false,
+                                            filter = function(c)
+                                                return c.id == client.id
+                                            end
+                                        }
+                                    end
+                                }
+                            )
+                        end
+                    }
+                )
+            end
         }
     },
     {}
 )
 
-
+vim.keymap.set("n", "ee", ":Neotree toggle<CR>", { silent = true })
 
 vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", {silent = true})
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", {expr = true, silent = true})
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", {expr = true, silent = true})
 
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", {clear = true})
+
 vim.api.nvim_create_autocmd(
     "TextYankPost",
     {
@@ -200,6 +271,24 @@ require("telescope").setup {
         }
     }
 }
+
+require("cokeline").setup(
+    {
+        show_if_buffers_are_at_least = 2,
+        default_hl = {
+            fg = "#66a3ff",
+            bg = function(buffer)
+                local hlgroups = require("cokeline.hlgroups")
+                return buffer.is_focused and "#3c3e3c" or hlgroups.get_hl_attr("ColorColumn", "bg")
+            end
+        }
+    }
+)
+
+local map = vim.api.nvim_set_keymap
+map("n", "<Tab>", "<Plug>(cokeline-focus-next)", {silent = true})
+map("n", "<Leader>p", "<Plug>(cokeline-switch-prev)", {silent = true})
+map("n", "<Leader>n", "<Plug>(cokeline-switch-next)", {silent = true})
 
 pcall(require("telescope").load_extension, "fzf")
 
@@ -430,3 +519,4 @@ cmp.setup {
 }
 
 -- nvim --headless "+Lazy! sync" +qa
+
