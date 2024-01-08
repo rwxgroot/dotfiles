@@ -32,6 +32,7 @@ return {
         "hrsh7th/nvim-cmp",
         config = function()
             local cmp = require("cmp")
+
             require("luasnip.loaders.from_vscode").lazy_load()
         
             cmp.setup({
@@ -68,8 +69,18 @@ return {
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
             lspconfig.rust_analyzer.setup({
-                capabilities = capabilities
-            })
+                capabilities = capabilities,
+				settings = {
+					['rust-analyzer'] = {
+						check = {
+							command = "clippy";
+						},
+						diagnostics = {
+							enable = true;
+						}
+					},
+				},
+			})
 
             vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
