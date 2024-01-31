@@ -10,6 +10,20 @@ return {
 		vim.keymap.set("n", "<C-e>", ":Neotree filesystem reveal left<CR>", {})
 		vim.keymap.set("n", "<C-w>", ":Neotree toggle<CR>", {})
 		vim.keymap.set("n", "<C-f>", ":Neotree buffers reveal float<CR>", {})
-	end
 
+		require("neo-tree").setup({
+			auto_clean_after_session_restore = true, 
+			close_if_last_window = true, 
+			filesystem = {
+				hijack_netrw_behavior = "open_current", 
+			},	
+			default_component_configs = {
+				git_status = {
+					symbols = {
+						unstaged  = "",
+					},
+				}
+			}
+		})
+	end
 }
