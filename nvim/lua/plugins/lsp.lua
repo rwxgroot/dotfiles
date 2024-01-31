@@ -70,16 +70,6 @@ return {
 
             lspconfig.rust_analyzer.setup({
                 capabilities = capabilities,
-				settings = {
-					['rust-analyzer'] = {
-						check = {
-							command = "clippy";
-						},
-						diagnostics = {
-							enable = true;
-						}
-					},
-				},
 			})
 
             vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)

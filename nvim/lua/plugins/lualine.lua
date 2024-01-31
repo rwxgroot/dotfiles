@@ -1,6 +1,6 @@
 return {
-    "nvim-lualine/lualine.nvim",
-    opts = function()	
+	"nvim-lualine/lualine.nvim",
+	opts = function()	
 		local colors = {
 			fg     = '#abb2bf',
 			bg     = '#282c34',
