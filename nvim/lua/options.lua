@@ -8,3 +8,7 @@ vim.o.shiftwidth = 4
 vim.o.updatetime = 300
 vim.o.termguicolors = true
 vim.o.clipboard = 'unnamedplus'
+vim.o.hlsearch = false
+vim.o.undofile = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
