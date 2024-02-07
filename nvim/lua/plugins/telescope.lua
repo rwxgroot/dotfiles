@@ -5,6 +5,6 @@ return {
 		"nvim-lua/plenary.nvim"
 	},
 	config = function()
-		vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, {desc = "[S]earch [F]iles"})
+		vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, {desc = "[F]ind [F]iles"})
 	end
 }
