@@ -30,7 +30,7 @@ cursor = "#a6a28c"
 text = "#20201d"
 
 [font]
-size = 12
+size = 14
 
 [font.normal]
 family = "SauceCodePro Nerd Font"
