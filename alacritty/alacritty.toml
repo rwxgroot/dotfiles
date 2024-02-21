@@ -1,49 +1,39 @@
-[colors.bright]
-black = "#7d7a68"
-blue = "#6684e1"
-cyan = "#1fad83"
-green = "#60ac39"
-magenta = "#b854d4"
-red = "#d73737"
-white = "#fefbec"
-yellow = "#cfb017"
-
-[colors.cursor]
-cursor = "#a6a28c"
-text = "#20201d"
-
-[colors.normal]
-black = "#20201d"
-blue = "#6684e1"
-cyan = "#1fad83"
-green = "#60ac39"
-magenta = "#b854d4"
-red = "#d73737"
-white = "#a6a28c"
-yellow = "#cfb017"
-
 [colors.primary]
 background = "#282828"
 foreground = "#a6a28c"
 
+[colors.bright]
+black   = '#5c6370'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#ffffff'
+
+[colors.normal]
+black   = '#1e2127'
+red     = '#e06c75'
+green   = '#98c379'
+yellow  = '#d19a66'
+blue    = '#61afef'
+magenta = '#c678dd'
+cyan    = '#56b6c2'
+white   = '#abb2bf'
+
 [cursor.style]
 shape = "Beam"
+
+[colors.cursor]
+cursor = "#a6a28c"
+text = "#20201d"
 
 [font]
 size = 12
 
 [font.normal]
 family = "SauceCodePro Nerd Font"
-
-[[keyboard.bindings]]
-action = "Paste"
-key = "V"
-mods = "Alt"
-
-[[keyboard.bindings]]
-action = "Copy"
-key = "C"
-mods = "Alt"
 
 [scrolling]
 history = 0
