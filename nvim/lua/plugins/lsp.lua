@@ -9,7 +9,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = {"rust_analyzer", "taplo"}
+                ensure_installed = {"rust_analyzer", "pylsp"}
             })
         end
     },
@@ -68,9 +68,10 @@ return {
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            lspconfig.rust_analyzer.setup({
-                capabilities = capabilities,
-			})
+			lspconfig.rust_analyzer.setup{
+				capabilities = capabilities,
+			}
+			lspconfig.pylsp.setup{}
 
             vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
             vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
