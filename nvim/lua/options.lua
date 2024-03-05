@@ -17,5 +17,3 @@ vim.o.smartcase = true
 
 vim.keymap.set("n", "<leader>sa", "ggVG")
 vim.keymap.set("n", "//", ":noh<return>")
-
-
