@@ -73,7 +73,7 @@ return {
 			lspconfig.rust_analyzer.setup{
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)
-					vim.lsp.inlay_hint.enable(bufnr)
+					vim.lsp.inlay_hint.enable(true)
 				end
 			}
 			lspconfig.pylsp.setup{settings = {
