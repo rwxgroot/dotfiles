@@ -3,23 +3,23 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("mason").setup()
-		end
+		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = {"rust_analyzer", "pylsp"}
+				ensure_installed = { "rust_analyzer", "pylsp", "tsserver", "typos_lsp", "lua_ls" },
 			})
-		end
+		end,
 	},
 	{
 		"j-hui/fidget.nvim",
 		tag = "legacy",
-		opts = {}
+		opts = {},
 	},
 	{
-		"hrsh7th/cmp-nvim-lsp"
+		"hrsh7th/cmp-nvim-lsp",
 	},
 	{
 		"L3MON4D3/LuaSnip",
@@ -54,61 +54,78 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, 
-					},
-					{
-						{ name = "buffer" },
-					}
-				),
+					{ name = "luasnip" },
+				}, {
+					{ name = "buffer" },
+				}),
 			})
 		end,
-	},    
+	},
+	{
+		"nvimtools/none-ls.nvim",
+		config = function()
+			local null_ls = require("null-ls")
+			null_ls.setup({
+				sources = {
+					null_ls.builtins.formatting.stylua,
+					null_ls.builtins.formatting.prettier,
+				},
+			})
+
+			vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+		end,
+	},
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local lspconfig = require('lspconfig')
+			local lspconfig = require("lspconfig")
 
-			local capabilities = require('cmp_nvim_lsp').default_capabilities()
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			lspconfig.rust_analyzer.setup{
+			lspconfig.lua_ls.setup({})
+			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
 				on_attach = function(client, bufnr)
 					vim.lsp.inlay_hint.enable(true)
-				end
-			}
-			lspconfig.pylsp.setup{settings = {
-				pylsp = {
-					plugins = {
-						pycodestyle = {
-							maxLineLength = 100
-						}
-					}
-				}
-			}}
-
-			vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-			vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-			vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-			vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
-
-			vim.api.nvim_create_autocmd('LspAttach', {
-
-				group = vim.api.nvim_create_augroup('UserLspConfig', {}),
-
-				callback = function(ev)
-					vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-					local opts = { buffer = ev.buf }
-					vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-					vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-					vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-					vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-					vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-					vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-					vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-					vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 				end,
 			})
-		end
-	}
+			lspconfig.pylsp.setup({
+				settings = {
+					pylsp = {
+						plugins = {
+							pycodestyle = {
+								maxLineLength = 100,
+							},
+						},
+					},
+				},
+			})
+			lspconfig.tsserver.setup({})
+			lspconfig.typos_lsp.setup({})
+
+			vim.keymap.set("n", "<space>e", vim.diagnostic.open_float)
+			vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+			vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+			vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist)
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+
+				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+
+				callback = function(ev)
+					vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+					local opts = { buffer = ev.buf }
+					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+					vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+					vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, opts)
+					vim.keymap.set({ "n", "v" }, "<space>ca", vim.lsp.buf.code_action, opts)
+					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+				end,
+			})
+		end,
+	},
 }

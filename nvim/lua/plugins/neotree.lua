@@ -4,25 +4,24 @@ return {
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
-		"MunifTanjim/nui.nvim"
+		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		vim.keymap.set("n", "<C-e>", ":Neotree toggle<CR>", {})
-		vim.keymap.set("n", "<C-f>", ":Neotree buffers reveal float<CR>", {})
+		vim.keymap.set("n", "<C-e>", ":Neotree filesystem reveal left<CR>", {})
 
 		require("neo-tree").setup({
-			auto_clean_after_session_restore = true, 
-			close_if_last_window = true, 
+			auto_clean_after_session_restore = true,
+			close_if_last_window = true,
 			filesystem = {
-				hijack_netrw_behavior = "open_current", 
-			},	
+				hijack_netrw_behavior = "open_current",
+			},
 			default_component_configs = {
 				git_status = {
 					symbols = {
-						unstaged  = "",
+						unstaged = "",
 					},
-				}
-			}
+				},
+			},
 		})
-	end
+	end,
 }
