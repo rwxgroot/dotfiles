@@ -14,6 +14,7 @@ vim.o.undofile = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.o.relativenumber = true
+vim.o.clipboard = "unnamedplus"
 
 vim.keymap.set("n", "<leader>sa", "ggVG")
 vim.keymap.set("n", "//", ":noh<return>")
