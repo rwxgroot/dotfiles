@@ -25,10 +25,16 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- <C-s> save in n and i mode
-vim.keymap.set({ "n", "i" }, "<C-s>", '<cmd>:wa<CR>')
+vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>:wa<CR>")
 
 -- <space>q delete all term buffers
 vim.keymap.set("n", "Q", function()
+	-- Close the quickfix list if it's open
+	if vim.fn.getqflist() and #vim.fn.getqflist() > 0 then
+		vim.cmd("cclose")
+	end
+
+	-- Delete all terminal buffers
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if vim.api.nvim_buf_get_option(buf, "buftype") == "terminal" then
 			vim.api.nvim_buf_delete(buf, { force = true })
